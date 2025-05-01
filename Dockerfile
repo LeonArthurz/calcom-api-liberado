@@ -8,8 +8,7 @@ WORKDIR /app
 COPY . .
 
 # Instala dependências e builda usando Yarn
-RUN corepack enable && yarn install --check-cache --immutable-cache --mode=update-lockfile
-
+RUN corepack enable && yarn install --mode=update-lockfile
 RUN yarn build
 
 # Expõe a porta
