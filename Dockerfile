@@ -1,22 +1,19 @@
-# Use imagem base com Node + pnpm
+# Imagem base com Node
 FROM node:18
 
-# Instala pnpm globalmente
-RUN npm install -g pnpm
-
-# Define o diretório de trabalho
+# Define diretório
 WORKDIR /app
 
-# Copia os arquivos do projeto para dentro do container
+# Copia tudo para dentro do container
 COPY . .
 
-# Instala as dependências e gera o build
-RUN pnpm install
-RUN pnpm build
+# Instala dependências e builda usando Yarn
+RUN corepack enable && yarn install --immutable
+RUN yarn build
 
-# Expõe a porta padrão do Cal.com
+# Expõe a porta
 EXPOSE 3000
 
-# Comando que inicia a aplicação
-CMD ["pnpm", "start"]
+# Comando de inicialização
+CMD ["yarn", "start"]
 
